@@ -19,6 +19,7 @@ package com.wdullaer.materialdatetimepicker.date;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.StateListDrawable;
+import android.support.v4.view.accessibility.AccessibilityEventCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -125,7 +126,7 @@ public class YearPickerView extends ListView implements OnItemClickListener, OnD
                 v = (TextViewWithCircularIndicator) convertView;
             } else {
                 v = (TextViewWithCircularIndicator) LayoutInflater.from(parent.getContext())
-                  .inflate(R.layout.mdtp_year_label_text_view, parent, false);
+                        .inflate(R.layout.mdtp_year_label_text_view, parent, false);
                 v.setAccentColor(mController.getAccentColor(), mController.isThemeDark());
             }
             int year = mMinYear + position;
@@ -174,7 +175,7 @@ public class YearPickerView extends ListView implements OnItemClickListener, OnD
         super.onInitializeAccessibilityEvent(event);
         if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_SCROLLED) {
             event.setFromIndex(0);
-            event.setToIndex(0);
+            AccessibilityEventCompat.asRecord(event).setToIndex(0);
         }
     }
 }

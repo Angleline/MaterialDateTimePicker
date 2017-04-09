@@ -21,6 +21,8 @@ import android.graphics.Canvas;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
+import java.util.Locale;
+
 public class SimpleMonthView extends MonthView {
 
     public SimpleMonthView(Context context, AttributeSet attr, DatePickerController controller) {
@@ -29,24 +31,22 @@ public class SimpleMonthView extends MonthView {
 
     @Override
     public void drawMonthDay(Canvas canvas, int year, int month, int day,
-            int x, int y, int startX, int stopX, int startY, int stopY) {
+                             int x, int y, int startX, int stopX, int startY, int stopY) {
         if (mSelectedDay == day) {
-            canvas.drawCircle(x , y - (MINI_DAY_NUMBER_TEXT_SIZE / 3), DAY_SELECTED_CIRCLE_SIZE,
+            canvas.drawCircle(x, y - (MINI_DAY_NUMBER_TEXT_SIZE / 3), DAY_SELECTED_CIRCLE_SIZE,
                     mSelectedCirclePaint);
         }
 
-        if(isHighlighted(year, month, day)) {
+        if (isHighlighted(year, month, day)) {
             mMonthNumPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-        }
-        else {
+        } else {
             mMonthNumPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         }
 
         // If we have a mindate or maxdate, gray out the day number if it's outside the range.
         if (mController.isOutOfRange(year, month, day)) {
             mMonthNumPaint.setColor(mDisabledDayTextColor);
-        }
-        else if (mSelectedDay == day) {
+        } else if (mSelectedDay == day) {
             mMonthNumPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
             mMonthNumPaint.setColor(mSelectedDayTextColor);
         } else if (mHasToday && mToday == day) {
@@ -55,6 +55,6 @@ public class SimpleMonthView extends MonthView {
             mMonthNumPaint.setColor(isHighlighted(year, month, day) ? mHighlightedDayTextColor : mDayTextColor);
         }
 
-        canvas.drawText(String.format("%d", day), x, y, mMonthNumPaint);
+        canvas.drawText(String.format(Locale.getDefault(), "%d", day), x, y, mMonthNumPaint);
     }
 }

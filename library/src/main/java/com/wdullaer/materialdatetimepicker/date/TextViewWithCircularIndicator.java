@@ -25,15 +25,15 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 import com.wdullaer.materialdatetimepicker.R;
 
 /**
  * A text view which, when pressed or activated, displays a colored circle around the text.
  */
-public class TextViewWithCircularIndicator extends TextView {
+public class TextViewWithCircularIndicator extends AppCompatTextView {
 
     private static final int SELECTED_CIRCLE_ALPHA = 255;
 
@@ -69,8 +69,9 @@ public class TextViewWithCircularIndicator extends TextView {
 
     /**
      * Programmatically set the color state list (see mdtp_date_picker_year_selector)
+     *
      * @param accentColor pressed state text color
-     * @param darkMode current theme mode
+     * @param darkMode    current theme mode
      * @return ColorStateList with pressed state
      */
     private ColorStateList createTextColor(int accentColor, boolean darkMode) {
